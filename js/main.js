@@ -8,15 +8,16 @@ class GoodsList {
       buttons.forEach(button => {
           button.addEventListener('click', (event) => {
               const goodId = event.target.parentElement.getAttribute('data-id');
-              this.addToCart(parseInt(goodId));
+              this.sendToCart(parseInt(goodId));
           })
       })
   }
   findGood(id) {
       return this.goods.find(good => good.id === id);
   }
-  addToCart(goodId) {
+  sendToCart(goodId) {
       const good = this.findGood(goodId);
+      console.log(good);
   }
     fetchGoods() {
       this.goods = [
@@ -48,7 +49,11 @@ class GoodsList {
         this.goods.forEach(good => {
            sum += good.price;
           });
-          return sum;
+        const calcSumButton = document.getElementById('calcSumButton');
+              calcSumButton.addEventListener('click', function(event) {
+        const sumGoodResult = document.getElementById('sumGoodResult');
+              sumGoodResult.innerText = `${sum} рублей`;
+          });
       }
   }
 class GoodsItem {
@@ -72,28 +77,18 @@ class Cart {
   constructor() {
       this.cartItems = [];
   }
-  addCardItem() {
-      // Добавление товара
+  addCardItem() { // Добавление товара
+
   }
-  removeCardItem() {
-      // Удаление товара
+  removeCardItem() { // Удаление товара
+
   }
-  render() {
-      // Отрисовка корзины
+  renderCardItem() {  // Отрисовка товаров в корзине
+
   }
 }
 
 const list = new GoodsList('.goods-list');
 list.fetchGoods();
 list.render();
-
-let cardButton = document.getElementById('card');
-cardButton.addEventListener('click', function(event) {
-    console.log(event);
-});
-
-let calcSumButton = document.getElementById('calcSumButton');
-calcSumButton.addEventListener('click', function(event) {
-   let sumGoodResult = document.getElementById('sumGoodResult');
-   sumGoodResult.innerText = `${list.sumGoods()} рублей`;
-});
+list.sumGoods();
