@@ -44,6 +44,7 @@ class GoodsList {
           this.container.innerHTML = listHtml;
           this.initListeners();
       }
+      // Метод для подсчета общей суммы товаров
       sumGoods() {
         let sum = 0;
         this.goods.forEach(good => {
@@ -83,7 +84,7 @@ class Cart {
   removeCardItem() { // Удаление товара
 
   }
-  renderCardItem() {  // Отрисовка товаров в корзине
+  renderCardItem() {  // Отрисовка товаров
 
   }
 }
