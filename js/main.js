@@ -1,3 +1,4 @@
+'use strict';
 class GoodsList {
     constructor(container) {
       this.container = document.querySelector(container);
