@@ -70,7 +70,7 @@ class GoodsItem {
               <img src="${this.img}" alt="alt">
               <h3>${this.title}</h3>
               <p>${this.price}</p>
-              <button class="add-to-cart">Купить</button>
+              <button class="add-to-cart">В корзину</button>
             </div>`
     }
   }

@@ -1,0 +1,206 @@
+/* transition */
+.btn, .closer, .overlay {
+	transition: all 0.2s;
+}
+
+.btn {
+    margin-right: 20px;
+    margin-top: 15px;
+	border-radius:5px;
+	border:1px solid #566963;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size: 15px;
+	font-weight:bold;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #2b665e;
+}
+
+.btn-default {
+	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+	background-color:#768d87;
+}
+
+.btn-default:hover {
+	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+	background-color:#6c7c7c;
+}
+
+.btn-default:active {
+	outline: none;
+}
+
+.overlay {
+	opacity: 0;
+	visibility: hidden;
+	position:fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 110;
+	background: rgba(0,0,0,0.87);
+}
+
+.dlg-modal {
+	width: 576px;
+	height: 300px;
+	opacity: 0;
+	visibility: hidden;
+	text-align: center;
+	position: fixed;
+	left: 50%;
+	top: 180px;
+	z-index: 130;
+	margin-left: -330px;
+	margin-top: -50px;
+	padding: 47px 36px;
+    border-radius: 10px;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border: 2px solid #dcdcdc;
+	color:#666666;
+	filter: alpha(opacity=0);
+}
+
+.dlg-modal h2 {
+	margin-top: -15px;
+   }
+
+.dlg-modal-slide {
+	top: -320px;
+	visibility: visible;
+	opacity: 1;
+}
+
+.modal-outer {
+	width: 760px;
+	min-height: 460px;
+	position: fixed;
+	left: 50%;
+	z-index: 120;
+	margin-left: -380px;
+	padding: 80px 0;
+	background: #18181a;
+}
+
+.modal-outer > div {
+	display: none;
+	opacity: 1;
+	visibility: visible;
+	position: static;
+	margin: 0 auto;
+}
+
+.closer {
+	width: 40px;
+	height: 40px;
+	display: block;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	background: url('../img/cross.png') no-repeat;
+	cursor: pointer;
+}
+
+.closer:hover {
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.menu-container {
+    margin-top: -20px;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border: 2px solid #dcdcdc;
+	border-radius: 10px;
+	margin-bottom: 25px;
+}
+
+.menu-form {
+	margin-bottom: 20px;
+}
+
+.price, .calories {
+	display: inline;
+    font-size: 20px;
+}
+
+.calories {
+	margin-left: 50px;
+}
+/* animation */
+.fadeIn, .fadeOut, .slideInDown, .slideOutUp {
+	-webkit-animation-duration: 0.4s;
+	animation-duration: 0.4s;
+	animation-timing-function: ease-out;}
+
+@keyframes fadeIn {
+	from {opacity: 0; visibility: hidden;}
+	to {opacity:1; visibility: visible;}
+}
+
+.fadeIn {
+	-webkit-animation-name: fadeIn;
+	animation-name: fadeIn;
+	opacity: 1;
+	visibility: visible;}
+
+@keyframes fadeOut {
+	from {opacity: 1;
+		visibility: visible;}
+	to {opacity:0;
+		visibility: hidden;}
+}
+
+.fadeOut {-webkit-animation-name: fadeOut;
+	animation-name: fadeOut;
+	opacity: 0;
+	visibility: hidden;}
+
+@keyframes slideInDown {
+	from {top: -320px;}
+	to {top: 180px;}
+}
+
+.slideInDown {-webkit-animation-name: slideInDown;
+	animation-name: slideInDown;
+	top: 180px;
+}
+
+@keyframes slideOutUp {
+	from {top: 180px;}
+	to {top: -320px;}
+}
+
+.slideOutUp {
+	-webkit-animation-name: slideOutUp;
+	animation-name: slideOutUp;
+	top: -320px;
+}
+
+@media screen and (max-width: 800px) {
+	.modal-outer {width: 620px; min-height: auto; margin-left: -310px; padding: 50px 0;}
+		.modal-outer .dlg-modal {width: 420px;}
+}
+
+@media screen and (max-width: 640px) {
+	.btn {height: 48px; line-height: 48px; padding: 0 36px;}
+	.dlg-modal {width: 420px; margin-left: -210px;}
+	.modal-outer {width: 480px; margin-left: -240px;}
+		.modal-outer .dlg-modal {width: 300px; height: 150px;}
+}
+
+@media screen and (max-width: 480px) {
+	.dlg-modal {width: 300px; margin-left: -150px;}
+	.modal-outer {width: 320px; margin-left: -155px;}
+		.modal-outer .dlg-modal {width: 290px; height: 150px;}
+}
