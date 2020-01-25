@@ -30,6 +30,11 @@
 }
 
 .btn-default:active {
+	position:relative;
+	top: 2px;
+}
+
+.btn-default:focus {
 	outline: none;
 }
 
