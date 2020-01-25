@@ -131,16 +131,11 @@
 }
 
 .menu-form {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .price, .calories {
-	display: inline;
     font-size: 20px;
-}
-
-.calories {
-	margin-left: 50px;
 }
 /* animation */
 .fadeIn, .fadeOut, .slideInDown, .slideOutUp {
