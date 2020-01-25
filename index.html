@@ -25,7 +25,7 @@
         <p id="sumGoodResult"></p>
         <button id="calcSumButton">Сумма всех товаров</button>
     </div>
-    <button type="button" class="btn btn-default" data-modal="modal_1">3 задание</button>
+    <button type="button" class="btn btn-default" data-modal="modal_1">Расчет калорий</button>
     <div id="overlay" class="overlay" data-close=""></div>
 		<div id="modal_1" class="dlg-modal">
             <span class="closer" data-close=""></span>
@@ -34,45 +34,47 @@
                 <form class="menu-form">
                     <h4>Размер гамбургера:</h4>
                      <label for="big-size">
-                        <input type="radio" name="size" id="big-size" checked>
+                        <input type="radio" name="size" id="big-size" value="big-size" checked>
                                 <span>большой</span>
                      </label>
                      <label for="small-size">
-                        <input type="radio" name="size" id="small-size">
+                        <input type="radio" name="size" id="small-size" value="small-size">
                                 <span>маленький</span>
                      </label>
                         <h4>Добавить начинку:</h4>
                         <label for="cheese">
-                            <input type="radio" name="stuffing" id="cheese" checked>
+                            <input type="radio" name="stuffing" id="cheese" value="cheese" checked>
                                 <span>сыр</span>
                      </label>
                         <label for="salate">
-                            <input type="radio" name="stuffing" id="salate">
+                            <input type="radio" name="stuffing" id="salate" value="salate">
                                 <span>салат</span>
                      </label>
                      <label for="potato">
-                            <input type="radio" name="stuffing" id="potato">
+                            <input type="radio" name="stuffing" id="potato" value="potato">
                                 <span>картофель</span>
                      </label>
                             <h4>Дополнительно:</h4>
                      <label for="seasoning">
-                            <input type="checkbox" name="seasoning" id="seasoning">
+                            <input type="checkbox" name="seasoning" id="seasoning" value="seasonig">
                                 <span>приправа</span>
                      </label>
                      <label for="mayo">
-                            <input type="checkbox" name="mayo" id="mayo">
+                            <input type="checkbox" name="mayo" id="mayo" value="mayo">
                                 <span>майонез</span>
                      </label>
                     </form>
             </div>
-                    <div class="price"></div>
                     <div class="calories"></div>
+                    <div class="price"></div>
 		</div>
     <div class="footer-down">&copy; Все права защищены</div>
 </footer>
+
+
 <script src="js/main.js"></script>
 <script>var typeAnimate = 'fade';</script>
 <script src="js/popup-css3.function.js"></script>
-<script src="js/additional.js"></script>
+<script src="js/burger_calories.js"></script>
 </body>
 </html>
