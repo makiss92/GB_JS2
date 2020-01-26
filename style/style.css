@@ -85,10 +85,11 @@ header, footer {
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .goods-item {
+    margin-right: 15px;
     flex-wrap: wrap;
     width: 160px;
     padding: 8px;
