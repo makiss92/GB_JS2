@@ -19,7 +19,7 @@ html, body {
     background-color:#f6f6f6;
 }
 
-header {
+header, footer {
     max-width: 1200px;
     height: 71px;
     margin: 0 auto;
@@ -31,7 +31,7 @@ header {
 	color:#666666;
 }
 
-.header-container {
+.header-container, .footer-container {
     margin-top: -5px;
     display: flex;
     justify-content: space-between;
@@ -43,8 +43,8 @@ header {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.cart-button {
-    width: 100px;
+.cart-button, #calcSumButton {
+    width: 120px;
     height: 50px;
     margin-right: 20px;
     margin-top: 15px;
@@ -57,19 +57,73 @@ header {
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:15px;
+	font-size: 15px;
 	font-weight:bold;
 	text-decoration:none;
 	text-shadow:0px -1px 0px #2b665e;
 }
-.cart-button:hover {
+
+.cart-button:hover, #calcSumButton:hover, .cart-clean:hover {
 	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
 	background-color:#6c7c7c;
 }
-.cart-button:active {
+.cart-button:active, #calcSumButton:active, {
 	position:relative;
-	top: 1px;
+    top: -2;
+    outline: none;
 }
+
+.cart-clean:focus {
+    outline: none;
+}
+
+.title-cart {
+    width: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.cart-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .title-cart thead {
+    font-size: 25px;
+  }
+  .title-cart tbody {
+  }
+
+  .cart-cell input {
+      width: 50px;
+  }
+
+.cart-clean {
+   position: absolute;
+   top: 345px;
+   left: 548px;
+    width: 90px;
+    height: 40px;
+	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+	background-color:#768d87;
+	border-radius:5px;
+	border:1px solid #566963;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size: 13px;
+	font-weight:bold;
+	text-shadow:0px -1px 0px #2b665e;
+}
+
+.cart-clean:active {
+
+}
+
+
 
 .container {
     max-width: 1200px;
@@ -80,10 +134,11 @@ header {
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .goods-item {
+    margin-right: 15px;
     flex-wrap: wrap;
     width: 160px;
     padding: 8px;
@@ -122,4 +177,50 @@ header {
     text-align: right;
     color: crimson;
     font-weight: bold;
+}
+
+#sumGoodResult {
+    height: 70px;
+    padding-left: 15px;
+    font-size: 25px;
+}
+
+.footer-down {
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.add-to-cart {
+    width: 70px;
+    height: 20px;
+    margin-right: 20px;
+    margin-top: 15px;
+	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+	background-color:#768d87;
+	border-radius:5px;
+	border:1px solid #566963;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size: 10px;
+	font-weight:bold;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #2b665e;
+}
+
+.add-to-cart:hover {
+	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+	background-color:#6c7c7c;
+}
+.add-to-cart:active {
+	position:relative;
+	top: 2px;
+}
+
+.add-to-cart:focus {
+	outline: none;
 }
