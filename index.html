@@ -12,7 +12,24 @@
 <header>
     <div class="header-container">
         <h1 class="logo">Online Store</h1>
-        <button class="cart-button" id="card">Корзина</button>
+        <button class="cart-button" id="card" data-modal="modal_2">Корзина</button>
+        <div id="overlay" class="overlay" data-close=""></div>
+        <div id="modal_2" class="dlg-modal cart-container cart-container-hidden">
+        <span class="closer" data-close=""></span>
+            <table class="title-cart">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="cart-items"></tbody>
+            </table>
+            <button class="cart-clean">Очистить</button>
+            <!-- <div class="cart__total"></div> -->
+        </div>
     </div>
 </header>
 <main>
@@ -26,7 +43,6 @@
         <button id="calcSumButton">Сумма всех товаров</button>
     </div>
     <button type="button" class="btn btn-default" data-modal="modal_1">Расчет калорий</button>
-    <div id="overlay" class="overlay" data-close=""></div>
 		<div id="modal_1" class="dlg-modal">
             <span class="closer" data-close=""></span>
             <h2>Меню:</h2>
