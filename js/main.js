@@ -2,56 +2,77 @@
 
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
-function makeGetRequest(url, callback) {
+function makeGetRequest(url) {
     return new Promise((resolve, reject) => {
         let xhr;
-
         if (window.XMLHttpRequest) {
             xhr = new window.XMLHttpRequest();
-        } else {
-            xhr = new window.ActiveXObject('Microsoft.XMLHTTP');
+        } else  {
+            xhr = new window.ActiveXObject("Microsoft.XMLHTTP")
         }
+
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-              callback(xhr.responseText)
-                if (xhr.status === 200) {
-                    const body = JSON.parse(xhr.responseText)
-                    resolve(body);
-                } else {
-                    reject(new Error("Network Error"));
+                if (xhr.status !== 200) {
+                    reject(xhr.responseText);
+                    return
                 }
+                const body = JSON.parse(xhr.responseText);
+                resolve(body)
             }
-        }
+        };
+
         xhr.onerror = function (err) {
-            reject(err);
-        }
+            reject(err)
+        };
 
         xhr.open('GET', url);
         xhr.send();
-    })
-};
+    });
+}
+
 class GoodsList {
     constructor(container) {
       this.container = document.querySelector(container);
       this.goods = [];
+      this.filteredGoods = [];
     }
     findGood(id) {
       return this.goods.find(good => good.id === id);
     }
-    fetchGoods(callback) {
-        makeGetRequest(`${API_URL}/catalogData.json`, (goods) => {
-            this.goods = JSON.parse(goods);
-            callback();
-        })
+    async fetchGoods() {
+        try {
+            this.goods = await makeGetRequest(`${API_URL}/catalogData.json`);
+            this.filteredGoods = [...this.goods];
+        } catch (e) {
+            console.error(`Error: ${e}`)
+        }
+    }
+    initListeners() {
+        const searchForm = document.querySelector('.goods-search');
+        const searchValue = searchForm.querySelector('.goods-search-value');
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            let value = searchValue.value;
+            value = value.trim();
+            this.filterGoods(value);
+        });
+    }
+    filterGoods(value) {
+        const regexp = new RegExp(value, 'i');
+        this.filteredGoods = this.goods.filter((good) => {
+            return regexp.test(good.product_name);
+        });
+        this.render();
     }
     render() {
         let listHtml = '';
-        this.goods.forEach(good => {
+        this.filteredGoods.forEach(good => {
             const goodItem = new GoodsItem(good.id_product, good.product_name, good.price, good.img);
             listHtml += goodItem.render();
         });
         this.container.innerHTML = listHtml;
-   //     this.initListeners();
+        this.initListeners();
       }
       // Метод для подсчета общей суммы товаров
       sumGoods() {
@@ -95,12 +116,12 @@ class Cart extends GoodsList {
     initListeners() {
         const cartCleanBtn = document.querySelector(".cart-clean");
         cartCleanBtn.addEventListener("click", () => {
-            this.cleanCart()
+            this.cleanCart();
         });
     }
     findCard(id) {
         return this.cartItems.find(cartItems => cartItems.id === id);
-      }
+    }
       addToCart() {
         let goodsBtns = document.querySelectorAll(".add-to-cart");
         goodsBtns = [].slice.call(goodsBtns);
@@ -157,7 +178,7 @@ class Cart extends GoodsList {
         }
     }
     if (listHtml === '') {
-        listHtml = '<span class="cart-null">Пока нет товаров в корзине</span>';
+        listHtml = '<p  class="cart-null">Пока нет товаров в корзине</p>';
          //   let cartClean = document.querySelector(".cart-clean");
          //   cartClean.style.display = "none";
 
@@ -220,13 +241,13 @@ class CartItem extends GoodsItem {
 
 
 const list = new GoodsList('.goods-list');
-list.fetchGoods(() => {
+list.fetchGoods().then(() => {
     list.render();
     list.sumGoods();
-});
+})
 
 const cart = new Cart();
-cart.fetchGoods(() => {
+cart.fetchGoods().then(() => {
     cart.addToCart();
     cart.initListeners();
 });

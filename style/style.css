@@ -21,7 +21,7 @@ html, body {
 
 header, footer {
     max-width: 1200px;
-    height: 71px;
+    min-height: 71px;
     margin: 0 auto;
     border-radius: 10px;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -35,6 +35,7 @@ header, footer {
     margin-top: -5px;
     display: flex;
     justify-content: space-between;
+    height: 50px;
 }
 
 .logo {
@@ -43,31 +44,74 @@ header, footer {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.cart-button, #calcSumButton {
+.goods-search {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    padding-right: 10px;
+}
+
+.goods-search-value {
+    height: 25px;
+    font-size:16px;
+    padding:6px;
+    border-radius: 10px;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border: 2px solid #dcdcdc;
+	color:#666666;
+}
+
+.goods-search-value:focus {
+   outline:none;
+}
+
+.goods-search-button:focus {
+    outline:none;
+} 
+
+.goods-search-button  {
     width: 120px;
-    height: 50px;
-    margin-right: 20px;
-    margin-top: 15px;
-	box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
-	background-color:#768d87;
-	border-radius:5px;
-	border:1px solid #566963;
+    height: 40px;
+	border-radius: 8px;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
+	font-family:Arial;
+	font-size: 15px;
+	font-weight:bold;
+    text-decoration:none;
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid #dcdcdc;
+    color:#666666;
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.cart-button, #calcSumButton {
+    width: 120px;
+    height: 40px;
+    margin-right: 20px;
+    margin-top: 20px;
+	border-radius:5px;
+	display:inline-block;
+	cursor:pointer;
 	font-family:Arial;
 	font-size: 15px;
 	font-weight:bold;
 	text-decoration:none;
-	text-shadow:0px -1px 0px #2b665e;
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid #dcdcdc;
+    color:#666666;
+    transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-.cart-button:hover, #calcSumButton:hover, .cart-clean:hover {
+.cart-button:hover, #calcSumButton:hover, .cart-clean:hover, .goods-search-button:hover {
 	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
-	background-color:#6c7c7c;
+    background-color:#666666;
+    color: white;
 }
-.cart-button:active, #calcSumButton:active, {
+.cart-button:focus, #calcSumButton:focus {
 	position:relative;
     top: -2;
     outline: none;
@@ -92,8 +136,6 @@ header, footer {
   .title-cart thead {
     font-size: 25px;
   }
-  .title-cart tbody {
-  }
 
   .cart-cell input {
       width: 50px;
@@ -105,25 +147,18 @@ header, footer {
    left: 548px;
     width: 90px;
     height: 40px;
-	box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
-	background-color:#768d87;
 	border-radius:5px;
-	border:1px solid #566963;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
 	font-family:Arial;
 	font-size: 13px;
 	font-weight:bold;
-	text-shadow:0px -1px 0px #2b665e;
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid #dcdcdc;
+    color:#666666;
+    transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
 }
-
-.cart-clean:active {
-
-}
-
-
 
 .container {
     max-width: 1200px;
@@ -197,24 +232,24 @@ header, footer {
     height: 20px;
     margin-right: 20px;
     margin-top: 15px;
-	box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
-	background-color:#768d87;
 	border-radius:5px;
-	border:1px solid #566963;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
 	font-family:Arial;
 	font-size: 10px;
 	font-weight:bold;
 	text-decoration:none;
-	text-shadow:0px -1px 0px #2b665e;
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid #dcdcdc;
+    color:#666666;
+    transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
 .add-to-cart:hover {
-	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
-	background-color:#6c7c7c;
+    background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+    background-color:#666666;
+    color: white;
 }
 .add-to-cart:active {
 	position:relative;
