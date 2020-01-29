@@ -246,6 +246,7 @@ list.fetchGoods().then(() => {
     list.sumGoods();
 })
 
+
 const cart = new Cart();
 cart.fetchGoods().then(() => {
     cart.addToCart();
