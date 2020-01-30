@@ -1,9 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="style/popup.style.css" rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
     <title>Online Store</title>
 </head>
@@ -11,7 +12,27 @@
 <header>
     <div class="header-container">
         <h1 class="logo">Online Store</h1>
-        <button class="cart-button">Корзина</button>
+        <form class="goods-search">
+            <input type="text" class="goods-search-value">
+                <button class="goods-search-button">Искать товар</button>
+        </form>
+        <button class="cart-button" id="card" data-modal="modal_2">Корзина</button>
+        <div id="overlay" class="overlay" data-close=""></div>
+        <div id="modal_2" class="dlg-modal cart-container cart-container-hidden">
+        <span class="closer" data-close=""></span>
+            <table class="title-cart">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="cart-items"></tbody>
+            </table>
+            <button class="cart-clean">Очистить</button>
+        </div>
     </div>
 </header>
 <main>
@@ -19,6 +40,17 @@
         <div class="goods-list"></div>
     </div>
 </main>
+<footer>
+    <div class="footer-container">
+        <p id="sumGoodResult"></p>
+        <button id="calcSumButton">Сумма всех товаров</button>
+    </div>
+    <div class="footer-down">&copy; Все права защищены</div>
+</footer>
+
+
 <script src="js/main.js"></script>
+<script>var typeAnimate = 'fade';</script>
+<script src="js/popup-css3.function.js"></script>
 </body>
 </html>
