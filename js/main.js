@@ -62,7 +62,15 @@ const app = new Vue({
             this.filteredGoods = this.goods.filter((good) => {
                 return regexp.test(good.product_name);
             });
-        }
+        },
+        sumGoods() {
+            let sum = 0;
+            this.goods.forEach(good => {
+               sum += good.price;
+              })
+              const sumGoodResult = document.getElementById('sumGoodResult');
+              sumGoodResult.innerText = `${sum} рублей`;
+          }
     },
     computed: {
         isGoodsEmpty(){
