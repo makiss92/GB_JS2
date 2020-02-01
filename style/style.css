@@ -41,6 +41,7 @@ header, footer {
 .logo {
     display: inline-block;
     padding-left: 15px;
+    padding-right: 220px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -68,7 +69,12 @@ header, footer {
 
 .goods-search-button:focus {
     outline:none;
-} 
+}
+
+.goods-search-button:active {
+    position:relative;
+	top: 2px;
+}
 
 .goods-search-button  {
     width: 120px;
@@ -85,6 +91,14 @@ header, footer {
     border: 2px solid #dcdcdc;
     color:#666666;
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.goods-not-found {
+    padding: 50px 0px;
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+    color:#666666;
 }
 
 .cart-button, #calcSumButton {
@@ -111,6 +125,12 @@ header, footer {
     background-color:#666666;
     color: white;
 }
+
+.cart-button:active, #calcSumButton:active {
+    position:relative;
+	top: 2px;
+}
+
 .cart-button:focus, #calcSumButton:focus {
 	position:relative;
     top: -2;
@@ -121,30 +141,65 @@ header, footer {
     outline: none;
 }
 
-.title-cart {
-    width: 100%;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.cart {
+    margin-left: auto;
+    position: relative;
 }
 
 .cart-container {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    position: absolute;
+    right: -2px;
+    top: 65px;
     overflow: hidden;
+    background-color: black;
+    min-width: 600px;
+    min-height: 200px;
+    border-radius: 10px;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border: 2px solid #dcdcdc;
+	color:#666666;
   }
 
-  .title-cart thead {
-    font-size: 25px;
+.closer {
+	width: 40px;
+	height: 40px;
+	display: block;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	background: url('../img/cross.png') no-repeat;
+	cursor: pointer;
+}
+
+.closer:hover {
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+
+.title-cart thead {
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
-  .cart-cell input {
+.title-cart th {
+    padding-top: 15px;
+    width: 200px;
+}
+
+.cart-cell input {
       width: 50px;
   }
 
 .cart-clean {
-   position: absolute;
-   top: 345px;
-   left: 548px;
+    position: absolute;
+    top: 150px;
+    left: 500px;
     width: 90px;
     height: 40px;
 	border-radius:5px;
@@ -158,6 +213,11 @@ header, footer {
     border: 2px solid #dcdcdc;
     color:#666666;
     transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.cart-clean:active {
+    outline: none;
+    top: 152px;
 }
 
 .container {
