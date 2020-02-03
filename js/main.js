@@ -1,29 +1,83 @@
-const goods = [
-    { title: "Робот-пылесос Xiaomi", price: 20000, img: 'https://via.placeholder.com/150' },
-    { title: "Смартфон Samsung Galaxy", price: 21500, img: 'https://via.placeholder.com/150' },
-    { title: "Стиральная машина Hotpoint", price: 32000, img: 'https://via.placeholder.com/150' },
-    { title: "Умные часы Apple watch", price: 26000, img: 'https://via.placeholder.com/150' },
-    { title: "Умный дом от Fibaro", price: 155000, img: 'https://via.placeholder.com/150' },
-    { title: "Умный Холодильник Bork", price: 50000, img: 'https://via.placeholder.com/150' },
-    { title: "Робот-пылесос Xiaomi", price: 20000, img: 'https://via.placeholder.com/150' },
-    { title: "Смартфон Samsung Galaxy", price: 21500, img: 'https://via.placeholder.com/150' },
-    { title: "Стиральная машина Hotpoint", price: 32000, img: 'https://via.placeholder.com/150' },
-    { title: "Умные часы Apple watch", price: 26000, img: 'https://via.placeholder.com/150' },
-    { title: "Умный дом от Fibaro", price: 155000, img: 'https://via.placeholder.com/150' },
-    { title: "Умный Холодильник Bork", price: 50000, img: 'https://via.placeholder.com/150' },
-];
+const API_URL = "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses";
 
-const renderGoodsItem = (title, price, img = '') => {
-    return `<div class="goods-item">
-        <img src="${img}" alt="alt">
-        <h3>${title}</h3>
-        <p>${price}</p>
-    </div>`
-};
+const app = new Vue({
+    el: '#app',
+    data: {
+        goods: [],
+        filteredGoods: [],
+        isVisibleCart: false,
+        searchLine: '',
+    },
+    methods: {
+        makeGetRequest(url) {
+            return new Promise((resolve, reject) => {
+                let xhr;
+                if (window.XMLHttpRequest) {
+                    xhr = new window.XMLHttpRequest();
+                } else  {
+                    xhr = new window.ActiveXObject("Microsoft.XMLHTTP")
+                }
 
-const renderGoodsList = (list, container) => {
-    const goodsList = list.map(good => renderGoodsItem(good.title, good.price, good.img));
-    document.querySelector(container).innerHTML = goodsList.join(''); // Объединяем элементы массива
-};
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status !== 200) {
+                            reject(xhr.responseText);
+                            const noData = document.querySelector('.goods-list');
+                            noData.style = (`justify-content: center;
+                                             font-size: 25px;
+                                             color: #666666;
+                                             margin-bottom: 15px;`);
+                            noData.innerText = `Нет данных`;
+                        }
+                        const body = JSON.parse(xhr.responseText);
+                        resolve(body)
+                    }
+                };
 
-renderGoodsList(goods, '.goods-list');
+                xhr.onerror = function (err) {
+                    reject(err)
+                };
+
+                xhr.open('GET', url);
+                xhr.send();
+            });
+        },
+        clickHandler(e) {
+            e.preventDefault();
+            this.filterGoods();
+        },
+        async fetchGoods() {
+            try {
+                this.goods = await this.makeGetRequest(`${API_URL}/catalogData.json`)
+                this.filteredGoods = [...this.goods];
+            } catch (event) {
+                console.error(event);
+            }
+        },
+        toggleCart(){
+            this.isVisibleCart = !this.isVisibleCart;
+        },
+        filterGoods() {
+            const regexp = new RegExp(this.searchLine, 'i');
+            this.filteredGoods = this.goods.filter((good) => {
+                return regexp.test(good.product_name);
+            });
+        },
+        sumGoods() {
+            let sum = 0;
+            this.goods.forEach(good => {
+               sum += good.price;
+              })
+              const sumGoodResult = document.getElementById('sumGoodResult');
+              sumGoodResult.innerText = `${sum} рублей`;
+          }
+    },
+    computed: {
+        isGoodsEmpty(){
+           return this.filteredGoods.length === 0;
+        },
+    },
+    mounted() {
+        this.fetchGoods();
+    }
+});

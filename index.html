@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,17 +8,57 @@
     <title>Online Store</title>
 </head>
 <body>
+<div id="app">
 <header>
     <div class="header-container">
         <h1 class="logo">Online Store</h1>
-        <button class="cart-button">Корзина</button>
+        <form class="goods-search">
+            <input type="text" class="goods-search-value" v-model="searchLine">
+                <button class="goods-search-button" v-on:click="clickHandler">Искать товар</button>
+        </form>
+        <div class="cart">
+            <button class="cart-button" v-on:click="toggleCart">Корзина</button>
+            <div class="cart-container" v-if="isVisibleCart">
+                <span class="closer" data-close=""  v-on:click="toggleCart"></span>
+                <table class="title-cart">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Цена</th>
+                            <th>Количество</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="cart-items"></tbody>
+                </table>
+                <button class="cart-clean">Очистить</button>
+            </div>
+        </div>
     </div>
 </header>
 <main>
     <div class="container">
-        <div class="goods-list"></div>
+        <div class="goods-list" v-if="!isGoodsEmpty">
+            <div class="goods-item" v-for="good in filteredGoods" :key="good.id_product">
+                <img src="https://via.placeholder.com/150" alt="alt">
+                <h3>{{ good.product_name }}</h3>
+                <p>{{ good.price }}</p>
+                <button class="add-to-cart">В корзину</button>
+            </div>
+        </div>
+        <div class="goods-not-found"v-else>Нет данных</div>
     </div>
 </main>
+<footer>
+    <div class="footer-container">
+        <p id="sumGoodResult"></p>
+        <button id="calcSumButton" v-on:click="sumGoods">Сумма всех товаров</button>
+    </div>
+    <div class="footer-down">&copy; Все права защищены</div>
+</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
