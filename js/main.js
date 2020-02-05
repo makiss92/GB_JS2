@@ -186,7 +186,7 @@ const app = new Vue({
         cartGoods: [],
         searchAllRegExp: /\w*/,
         filterElem: '',
-        isVisibleCart: true,
+        isVisibleCart: false,
         isQuerySuccess: false,
         queryError: '',
     },

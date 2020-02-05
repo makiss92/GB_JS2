@@ -14,13 +14,13 @@
         <h1 class="logo">Online Store</h1>
         <search-form @filter-goods="filterGoods"></search-form>
         <button class="cart-button" @click="toggleCart">Корзина</button>
-        <cart :is-visible-cart="isVisibleCart" @hide-cart="toggleCart"></cart>
     </div>
 </header>
 <main>
     <div class="container">
         <goods-list :goods="filteredGoods" v-if="isQuerySuccess"></goods-list>
         <query-not-found :queryError = "queryError" v-else></query-not-found>
+        <cart :is-visible-cart="isVisibleCart" @hide-cart="toggleCart"></cart>
     </div>
 </main>
 <footer>
