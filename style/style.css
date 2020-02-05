@@ -119,13 +119,13 @@ header, footer {
 
 .cart {
     position: absolute;
-    right: 37.5px;
-    top: 100px;
+    top: 150px;
+    left: 30%;
+    z-index: 10;
 }
 
 .cart-container {
-    width: 100%;
-    right: -2px;
+    right: -20px;
     top: 100px;
     overflow: hidden;
     background-color: black;

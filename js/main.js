@@ -186,7 +186,7 @@ const app = new Vue({
         cartGoods: [],
         searchAllRegExp: /\w*/,
         filterElem: '',
-        isVisibleCart: false,
+        isVisibleCart: true,
         isQuerySuccess: false,
         queryError: '',
     },
@@ -252,7 +252,7 @@ const app = new Vue({
                     !regPluses.test(this.filterElem)) {
                         filterRegExp = new RegExp(`${this.filterElem}`, 'gi');
             } else {
-                filterRegExp = this.searcAllRegExp;
+                filterRegExp = this.searchAllRegExp;
             }
             return this.goods.filter(good => filterRegExp.test(good.product_name));
         }
