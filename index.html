@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,17 +8,28 @@
     <title>Online Store</title>
 </head>
 <body>
+<div id="app">
 <header>
     <div class="header-container">
         <h1 class="logo">Online Store</h1>
-        <button class="cart-button">Корзина</button>
+        <search-form @filter-goods="filterGoods"></search-form>
+        <button class="cart-button" @click="toggleCart">Корзина</button>
     </div>
 </header>
 <main>
     <div class="container">
-        <div class="goods-list"></div>
+        <goods-list :goods="filteredGoods" v-if="isQuerySuccess"></goods-list>
+        <query-not-found :queryError = "queryError" v-else></query-not-found>
+        <cart :is-visible-cart="isVisibleCart" @hide-cart="toggleCart"></cart>
     </div>
 </main>
+<footer>
+    <div class="footer-container"></div>
+    <div class="footer-down">&copy; Все права защищены</div>
+</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
