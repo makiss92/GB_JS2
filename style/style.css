@@ -96,7 +96,7 @@ header, footer {
     transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-.cart-button:hover, .cart-clean:hover {
+.cart-button:hover {
 	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
     background-color:#666666;
     color: white;
@@ -113,15 +113,13 @@ header, footer {
 	outline: none;
 }
 
-.cart-clean:focus {
-    outline: none;
-}
-
 .cart {
     position: absolute;
     top: 150px;
     left: 30%;
     z-index: 10;
+    height: 250px;
+    overflow: auto;
 }
 
 .cart-container {
@@ -130,14 +128,13 @@ header, footer {
     overflow: hidden;
     background-color: black;
     min-width: 600px;
-    min-height: 200px;
+    min-height: 250px;
     border-radius: 10px;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
 	background-color:#ffffff;
 	border: 2px solid #dcdcdc;
     color:#666666;
-    overflow: hidden;
   }
 
 .closer {
@@ -169,46 +166,23 @@ header, footer {
     width: 200px;
 }
 
-.cart-clean {
-    top: 150px;
-    left: 720px;
-    width: 90px;
-    height: 40px;
-	border-radius:5px;
-	display:inline-block;
-	cursor:pointer;
-	font-family:Arial;
-	font-size: 13px;
-	font-weight:bold;
-    box-sizing: border-box;
-    background: transparent;
-    border: 2px solid #dcdcdc;
-    color:#666666;
-    transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
-}
-
-.cart-clean:active {
-    outline: none;
-    top: 152px;
-}
-
 .cart-good td {
     padding: 10px 70px
 }
 
 .inc-good, .dec-good {
-    padding-right: 15px;
+    padding-right: 5px;
     font-size: 25px;
     cursor: pointer;
 }
 
 .block-button {
-    margin-top: 10px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    text-align: right;
+    margin-top: 15px;
+    margin-bottom: 10px;
     padding-right: 15px;
     padding-left: 15px;
+    font-weight: bold;
 }
 
 .container {
@@ -224,7 +198,7 @@ header, footer {
 }
 
 .goods-item {
-    margin-right: 15px;
+    margin-right: 20px;
     flex-wrap: wrap;
     width: 160px;
     padding: 8px;

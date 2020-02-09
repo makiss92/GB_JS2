@@ -1,23 +1,5 @@
-const API_URL = "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses";
+'use strict';
 const cartGoods = [];
-
-function deBounce(callback, wait, immediate) {
-    let timeout;
-    return function () {
-        const context = this;
-        const args = arguments;
-        const later = function () {
-            timeout = null;
-            if (!immediate) callback.apply(context, args);
-        };
-        const callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) {
-            callback.apply(context, args)
-        }
-    }
-}
 
 const searchForm = {
     name: 'search-form',
@@ -26,7 +8,7 @@ const searchForm = {
     }),
     template: `
         <form class="search-form" @input.prevent="filterGoods">
-            <input type="text" placeholder="Поиск товаров" class="goods-search" v-model="searchLine">
+            <input type="text" placeholder="Поиск товаров" class="goods-search" v-model.trim="searchLine">
         </form>
     `,
     methods: {
@@ -39,40 +21,18 @@ const searchForm = {
 const goodsItem = {
     name: 'goods-item',
     props: ['good'],
-    template: `
-                <div class="goods-item">
+    template: `<div class="goods-item">
                     <img src="https://via.placeholder.com/150" alt="img" class="goods-img">
-                    <h3 class="title goods-title">{{good.product_name}}</h3>
-                    <p>{{good.price}} ₽</p>
+                    <h3 class="title goods-title">{{ good.product_name }}</h3>
+                    <p>{{ good.price }}₽</p>
                     <button class="add-to-cart" @click="addGoodToCart(good)">В корзину</button>
-                </div>
-            `,
-   methods:{
-        addGoodToCart(good) {
-            let goodElem = this.findGoodItem(good.id_product);
-            if ( goodElem >= 0){
-                cartGoods[goodElem].count++;
-                this.addCardModal();
-            } else {
-                const cartItem = Object.assign({}, good, {count: 1});
-                cartGoods.push(cartItem);
-                this.addCardModal();
+                </div>`,
+            methods: {
+                addGoodToCart(good) {
+                    this.$emit('add-cart', good);
+                },
             }
-        },
-        addCardModal() {
-            alert(`Товар добавлен в корзину`);
-        },
-        findGoodItem(id_product){
-            let goodId = -1;
-            cartGoods.forEach((item, index) => {
-                if (item.id_product == id_product) {
-                    goodId = index;
-                }
-            });
-            return goodId;
-        },
-    }
-};
+        };
 
 const goodsList = {
     name: 'goods-list',
@@ -82,10 +42,15 @@ const goodsList = {
     },
     template: `
             <div class="goods-list" v-if="!isGoodsEmpty">
-                <goods-item v-for="good in goods" :good="good" :key="good.id_product"></goods-item>
+                <goods-item v-for="good in goods" :good="good" :key="good.id_product" @add-cart="addCart"></goods-item>
             </div>
-            <div class="goods-not-found" v-else><h2>Нет данных</h2></div>
+            <div class="goods-not-found" v-else><h2>Нет товаров</h2></div>
             `,
+    methods: {
+        addCart(good) {
+            this.$emit('add-cart', good);
+        }
+    },
     computed: {
         isGoodsEmpty(){
             return this.goods.length === 0;
@@ -117,16 +82,15 @@ const cart = {
                         <td class="cart-price">{{ cartGood.price }}</td>
                         <td class="cart-count">{{ cartGood.count }}</td>
                         <td>
-                            <span class="inc-good" @click="incCartGood(cartGood.id_product)">+</span>
-                            <span class="dec-good" @click="decCartGood(cartGood.id_product)">-</span>
+                            <span class="inc-good" @click="incCartGood(cartGood)"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                            <span class="dec-good" @click="decCartGood(cartGood)"><i class="fa fa-minus" aria-hidden="true"></i></span>
                         </td>
                     </tr>
                 </thead>
                 <tbody class="cart-items"></tbody>
             </table>
             <div class="block-button">
-            <span class="cart-sum">Общая стоимость товаров: {{ cartSum }} ₽</span>
-            <button class="cart-clean">Очистить корзину</button>
+            <span class="cart-sum">Общая стоимость товаров: {{ cartSum }}₽</span>
             </div>
         </div>
     </div>
@@ -136,26 +100,11 @@ const cart = {
         hideCart(){
             this.$emit('hide-cart');
         },
-        incCartGood(idItem){
-            this.cartGoods[this.findGoodItem(idItem)].count++;
+        incCartGood(good){
+            this.$emit('increment-cart', good);
         },
-        decCartGood(idItem){
-            const goodElem = this.findGoodItem(idItem);
-            if (this.cartGoods[goodElem].count > 0) {
-                this.cartGoods[goodElem].count--;
-            }
-            if (this.cartGoods[goodElem].count === 0){
-                this.cartGoods.splice(goodElem, 1);
-            }
-        },
-        findGoodItem(id_product){
-            let goodId = -1;
-            this.cartGoods.forEach((item, index) => {
-                if (item.id_product == id_product) {
-                    goodId = index;
-                }
-            });
-            return goodId;
+        decCartGood(good){
+            this.$emit('decrement-cart', good);
         },
     },
     computed:{
@@ -178,12 +127,10 @@ const queryNotFound = {
     `,
 };
 
-
 const app = new Vue({
     el: '#app',
     data: {
         goods: [],
-        cartGoods: [],
         searchAllRegExp: /\w*/,
         filterElem: '',
         isVisibleCart: false,
@@ -224,15 +171,52 @@ const app = new Vue({
                 xhr.send();
             });
         },
-        async fetchGoods() {
-            try {
-                this.goods = await this.makeGetRequest(`${API_URL}/catalogData.json`);
-                this.isQuerySuccess = true;
-            } catch (event) {
-                this.isQuerySuccess = false;
-                this.queryerror = event.name + ":" + event.message;
-                console.error(event);
+        makePostRequest(url, data){
+            return new Promise((resolve, reject) => {
+                let xhr;
+                if (window.XMLHttpRequest) {
+                    xhr = new window.XMLHttpRequest();
+                } else {
+                    xhr = new window.ActiveXObject('Microsoft.XMLHTTP');
+                }
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        resolve(xhr.responseText);
+                    }
+                };
+                xhr.open('POST', url);
+                xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                xhr.send(data);
+            });
+        },
+       async addGoodToCart(good) {
+            let goodElem = this.findGoodItem(good.id_product);
+            if ( goodElem >= 0){
+                cartGoods[goodElem].count++;
+            } else {
+                const cartItem = Object.assign({}, good, {count: 1});
+                cartGoods.push(cartItem);
             }
+            await this.makePostRequest('/api/addCart', JSON.stringify(cartGoods));
+        },
+        async removeGoodInCart(good){
+            const goodElem = this.findGoodItem(good.id_product);
+              if (cartGoods[goodElem].count > 1) {
+                  cartGoods[goodElem].count--;
+              }else{
+                  cartGoods.splice(goodElem, 1);
+              };
+                await this.makePostRequest('/api/removeCart', JSON.stringify(cartGoods));
+        },
+        findGoodItem(id_product){
+            let goodId = -1;
+            cartGoods.forEach((item, index) => {
+                if (item.id_product == id_product) {
+                    goodId = index;
+                }
+            });
+            return goodId;
         },
         toggleCart(){
             this.isVisibleCart = !this.isVisibleCart;
@@ -241,6 +225,19 @@ const app = new Vue({
             this.filterElem = elem;
          }
     },
+    async mounted() {
+        Promise.all([this.makeGetRequest(`/api/goods`),
+            this.makeGetRequest(`/api/cart`)
+        ]).then(([catalogData, cartData])=> {
+            this.goods = catalogData;
+            cartGoods.push(...cartData);
+            this.isQuerySuccess = true;
+        }).catch((event) => {
+            this.isQuerySuccess = false;
+            this.queryerror = event.name + ":" + event.message;
+            console.error(event);
+        });
+    },
     computed: {
         filteredGoods() {
             let filterRegExp;
@@ -248,16 +245,13 @@ const app = new Vue({
             const regStars = /\*+/gi;
             const regPluses = /\++/gi;
             if (this.searchAllRegExp.test(this.filterElem) &&
-                    !regStars.test(this.filterElem) &&
-                    !regPluses.test(this.filterElem)) {
-                        filterRegExp = new RegExp(`${this.filterElem}`, 'gi');
+                !regStars.test(this.filterElem) &&
+                !regPluses.test(this.filterElem)) {
+                filterRegExp = new RegExp(`${this.filterElem}`, 'gi');
             } else {
                 filterRegExp = this.searchAllRegExp;
             }
-            return this.goods.filter(good => filterRegExp.test(good.product_name));
+                return this.goods.filter(good => filterRegExp.test(good.product_name));
         }
-    },
-    mounted() {
-        this.fetchGoods();
     }
 });
