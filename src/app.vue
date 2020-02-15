@@ -26,6 +26,8 @@
     import Cart from './components/cart.vue';
     import LocalStorage from './services/storage.services.js';
 
+    const cartGoods = [];
+
     export default {
         name: 'app',
         components: {
@@ -36,12 +38,11 @@
         data() {
             return {
                 goods: [],
-                cartGoods: [],
                 searchAllRegExp: /\w*/,
                 filterElem: '',
                 isVisibleCart: false,
                 isQuerySuccess: false,
-                queryerror: '',
+                queryError: '',
             }
         },
     methods: {
@@ -93,27 +94,27 @@
         },
        async addGoodToCart(good) {
             this.cartGoods = LocalStorage.getItem('cartGoods');
+            console.log(cartGoods);
             let goodElem = this.findGoodItem(good.id_product);
-            if ( goodElem >= 0) {
+            if ( goodElem >= 0){
                 cartGoods[goodElem].count++;
             } else {
                 const cartItem = Object.assign({}, good, {count: 1});
                 cartGoods.push(cartItem);
             }
-            console.log(cartGoods);
             await this.makePostRequest('/api/addCart', JSON.stringify(cartGoods));
-                LocalStorage.setItem('cartGoods', this.cartGoods);
+            LocalStorage.setItem('cartGoods', this.cartGoods);
         },
-        async removeGoodInCart(good) {
+        async removeGoodInCart(good){
             const goodElem = this.findGoodItem(good.id_product);
             this.cartGoods = LocalStorage.getItem('cartGoods');
               if (cartGoods[goodElem].count > 1) {
                   cartGoods[goodElem].count--;
-              } else {
+              }else{
                   cartGoods.splice(goodElem, 1);
               };
                 await this.makePostRequest('/api/removeCart', JSON.stringify(cartGoods));
-                    LocalStorage.setItem('cartGoods', this.cartGoods);
+                LocalStorage.setItem('cartGoods', this.cartGoods);
         },
         findGoodItem(id_product){
             let goodId = -1;
@@ -136,13 +137,12 @@
             this.makeGetRequest(`/api/cart`)
         ]).then(([catalogData, cartData])=> {
             this.goods = catalogData;
-            console.log(catalogData);
             LocalStorage.setItem('cartGoods', cartData);
-          //  cartGoods.push(...cartData);
+           // cartGoods.push(...cartData);
             this.isQuerySuccess = true;
         }).catch((event) => {
             this.isQuerySuccess = false;
-            this.queryerror = event.name + ":" + event.message;
+            this.queryError = event.name + ":" + event.message;
             console.error(event);
         });
     },

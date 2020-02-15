@@ -23,9 +23,7 @@
                 </thead>
                 <tbody class="cart-items"></tbody>
             </table>
-            <div class="block-button">
-            <span class="cart-sum">Общая стоимость товаров: {{ cartSum }}₽</span>
-            </div>
+            <div class="cart-sum block-button">Общая стоимость товаров: {{ cartSum }}₽</div>
         </div>
     </div>
     </transition>
@@ -39,9 +37,6 @@
             cartGoods: [],
         }),
     methods: {
-        hideCart(){
-            this.$emit('hide-cart');
-        },
         incCartGood(good){
             this.$emit('increment-cart', good);
         },
@@ -60,8 +55,8 @@
                 return sum;
             },
         },
-        mounted() {
-            this.cartGoods = LocalStorage.getItem('cartGoods');
+    mounted() {
+         this.cartGoods = LocalStorage.getItem('cartGoods');
         },
     };
 </script>
