@@ -31,6 +31,7 @@
     </transition>
 </template>
 <script>
+    import LocalStorage from '../services/storage.services.js';
     export default {
         name: 'Cart',
         props: ['isVisibleCart'],
@@ -48,7 +49,7 @@
             this.$emit('decrement-cart', good);
         },
     },
-    computed:{
+    computed: {
             cartSum() {
             let sum = 0;
             for (const good of this.cartGoods) {
@@ -58,6 +59,9 @@
             }
                 return sum;
             },
+        },
+        mounted() {
+            this.cartGoods = LocalStorage.getItem('cartGoods');
         },
     };
 </script>

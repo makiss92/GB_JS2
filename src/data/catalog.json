@@ -5,7 +5,7 @@
     { "id_product": 4, "product_name": "Наушники", "price": 450 },
     { "id_product": 5, "product_name": "Ноутбук", "price": 40000 },
     { "id_product": 6, "product_name": "Коврик", "price": 350 },
-    { "id_product": 7, "product_name": "Компьютер", "price": 80000 },
+    { "id_product": 7, "product_name": "Test", "price": 80000 },
     { "id_product": 8, "product_name": "Планшет", "price": 450 },
     { "id_product": 9, "product_name": "Наушники2", "price": 450 },
     { "id_product": 10, "product_name": "Кресло", "price": 10000 },
