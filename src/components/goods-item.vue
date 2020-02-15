@@ -10,10 +10,10 @@
     export default {
         name: 'goods-item',
         props: ['good'],
-        methods:{
+        methods: {
             addGoodToCart(good) {
                 this.$emit('add-cart', good);
             },
         }
-    }
+    };
 </script>

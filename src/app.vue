@@ -1,4 +1,4 @@
-<template></template>
+<template>
     <div id="app">
         <header>
             <div class="header-container">
@@ -24,7 +24,6 @@
     import SearchForm from './components/search-form.vue';
     import GoodsList from './components/goods-list.vue';
     import Cart from './components/cart.vue';
-    import LocalStorage from './services/storage.services.js';
 
     const cartGoods = [];
 
@@ -42,7 +41,7 @@
                 filterElem: '',
                 isVisibleCart: false,
                 isQuerySuccess: false,
-                queryerror: '',
+                queryerror: ''
             }
         },
     methods: {
@@ -93,7 +92,6 @@
             });
         },
        async addGoodToCart(good) {
-            this.cartGoods = LocalStorage.getItem('cartGoods');
             let goodElem = this.findGoodItem(good.id_product);
             if ( goodElem >= 0){
                 cartGoods[goodElem].count++;
@@ -102,18 +100,15 @@
                 cartGoods.push(cartItem);
             }
             await this.makePostRequest('/api/addCart', JSON.stringify(cartGoods));
-                LocalStorage.setItem('cartGoods', this.cartGoods);
         },
-        async removeGoodInCart(good){
+        async removeGoodInCart(good) {
             const goodElem = this.findGoodItem(good.id_product);
-            this.cartGoods = LocalStorage.getItem('cartGoods');
               if (cartGoods[goodElem].count > 1) {
                   cartGoods[goodElem].count--;
               } else {
                   cartGoods.splice(goodElem, 1);
               };
                 await this.makePostRequest('/api/removeCart', JSON.stringify(cartGoods));
-                    LocalStorage.setItem('cartGoods', this.cartGoods);
         },
         findGoodItem(id_product){
             let goodId = -1;
@@ -136,8 +131,7 @@
             this.makeGetRequest(`/api/cart`)
         ]).then(([catalogData, cartData])=> {
             this.goods = catalogData;
-            LocalStorage.setItem('cartGoods', cartData);
-           // cartGoods.push(...cartData);
+            cartGoods.push(...cartData);
             this.isQuerySuccess = true;
         }).catch((event) => {
             this.isQuerySuccess = false;

@@ -14,5 +14,5 @@
                 this.$emit('filter-goods', this.searchLine);
             }
         },
-    }
+    };
 </script>

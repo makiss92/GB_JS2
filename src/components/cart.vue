@@ -31,7 +31,6 @@
     </transition>
 </template>
 <script>
-    import LocalStorage from '../services/storage.services.js';
     export default {
         name: 'Cart',
         props: ['isVisibleCart'],
@@ -50,18 +49,15 @@
         },
     },
     computed:{
-        cartSum() {
-        let sum = 0;
-        for (const good of this.cartGoods) {
-            if (good.price) {
-                sum += good.price;
+            cartSum() {
+            let sum = 0;
+            for (const good of this.cartGoods) {
+                if (good.price) {
+                    sum += good.price;
+                }
             }
-        }
-            return sum;
+                return sum;
+            },
         },
-    },
-        mounted(){
-            this.cartGoods = LocalStorage.getItem('cartGoods');
-        },
-    }
+    };
 </script>

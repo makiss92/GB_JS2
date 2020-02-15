@@ -22,5 +22,5 @@
                 return this.goods.length === 0;
             }
         }
-    }
+    };
 </script>
