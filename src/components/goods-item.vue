@@ -34,7 +34,8 @@
 }
 
 .goods-item {
-    margin-right: 20px;
+    margin-right: 9px;
+    margin-left: 9px;
     flex-wrap: wrap;
     width: 160px;
     padding: 8px;
