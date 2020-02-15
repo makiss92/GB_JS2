@@ -33,7 +33,7 @@
         name: 'Cart',
         props: ['isVisibleCart'],
         data: () =>({
-            cartGoods: this.cartGoods,
+            cartGoods: [],
         }),
     methods: {
         hideCart() {
