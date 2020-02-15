@@ -50,9 +50,13 @@
         },
     },
     computed:{
-        cartSum(){
-            let sum=0;
-            this.cartGoods.forEach(elem => sum += elem.price * elem.count);
+        cartSum() {
+        let sum = 0;
+        for (const good of this.cartGoods) {
+            if (good.price) {
+                sum += good.price;
+            }
+        }
             return sum;
         },
     },

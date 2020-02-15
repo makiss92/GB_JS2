@@ -1,5 +1,5 @@
-<template>
-    <div id="hello">
+<template></template>
+    <div id="app">
         <header>
             <div class="header-container">
                 <h1 class="logo">Online Store</h1>
