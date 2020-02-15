@@ -29,14 +29,16 @@
     </transition>
 </template>
 <script>
-    import LocalStorage from '../services/storage.services.js';
     export default {
         name: 'Cart',
         props: ['isVisibleCart'],
         data: () =>({
-            cartGoods: [],
+            cartGoods: this.cartGoods,
         }),
     methods: {
+        hideCart() {
+            this.$emit('hide-cart');
+        },
         incCartGood(good){
             this.$emit('increment-cart', good);
         },
@@ -55,8 +57,9 @@
                 return sum;
             },
         },
-    mounted() {
-         this.cartGoods = LocalStorage.getItem('cartGoods');
-        },
+    /* mounted() {
+        const cardGoods = [];
+        // this.cartGoods = LocalStorage.getItem('cartGoods');
+        }, */
     };
 </script>

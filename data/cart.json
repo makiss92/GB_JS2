@@ -1,1 +1,1 @@
-[{"id_product":1,"product_name":"Мышка","price":500,"count":1},{"id_product":2,"product_name":"Клавиатура","price":800,"count":1},{"0":"[","count":6},{"id_product":6,"product_name":"Коврик","price":350,"count":1}]
+[{"id_product":1,"product_name":"Мышка","price":500,"count":3},{"id_product":2,"product_name":"Клавиатура","price":800,"count":1},{"id_product":5,"product_name":"Ноутбук","price":40000,"count":2},{"id_product":3,"product_name":"Колонки","price":450,"count":1},{"id_product":6,"product_name":"Коврик","price":350,"count":6}]
