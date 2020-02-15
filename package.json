@@ -1,20 +1,36 @@
 {
-  "name": "gb_js2",
-  "version": "1.0.0",
-  "description": "js2_lesson7",
-  "main": "server.js",
+  "name": "lesson8",
+  "version": "1.0.1",
+  "description": "js2_lesson8",
+  "main": "main.js",
   "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/polyfill": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
     "cors": "^2.8.5",
+    "css-loader": "^3.4.2",
     "express": "^4.17.1",
     "moment": "^2.24.0",
+    "babel-loader": "^8.0.6",
+    "node-localstorage": "^2.1.5",
     "node-static": "^0.7.11",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.0",
+    "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/runtime": "^7.8.4",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "file-loader": "^5.0.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "dev": "webpack-dev-server --hot --open",
     "build": "webpack"
   },
   "repository": {
