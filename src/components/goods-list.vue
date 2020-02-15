@@ -24,3 +24,20 @@
         }
     };
 </script>
+<style scoped>
+.goods-list {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.goods-not-found, .query-not-found {
+    padding: 30px 0px;
+    width: 100%;
+    text-align: center;
+    color:#666666;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+</style>

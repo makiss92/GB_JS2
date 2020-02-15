@@ -21,18 +21,18 @@
     </div>
 </template>
 <script>
-    import SearchForm from './components/search-form.vue';
-    import GoodsList from './components/goods-list.vue';
-    import Cart from './components/cart.vue';
+    import searchForm from './components/search-form.vue';
+    import goodsList from './components/goods-list.vue';
+    import cart from './components/cart.vue';
 
     const cartGoods = [];
 
     export default {
         name: 'app',
         components: {
-            SearchForm,
-            GoodsList,
-            Cart,
+            searchForm,
+            goodsList,
+            cart,
         },
         data() {
             return {
@@ -92,16 +92,14 @@
             });
         },
        async addGoodToCart(good) {
-           console.log(good);
             let goodElem = this.findGoodItem(good.id_product);
-            if ( goodElem >= 0){
+            if ( goodElem >= 0) {
                 cartGoods[goodElem].count++;
             } else {
                 const cartItem = Object.assign({}, good, {count: 1});
                 cartGoods.push(cartItem);
             }
             await this.makePostRequest('/api/addCart', JSON.stringify(cartGoods));
-            console.log(cartGoods);
         },
         async removeGoodInCart(good){
             const goodElem = this.findGoodItem(good.id_product);
@@ -159,3 +157,84 @@
     }
 }
 </script>
+<style scoped>
+html, body {
+    margin: 5px;
+    padding: 5px;
+    background-color:#f6f6f6;
+}
+
+header, footer {
+    max-width: 1200px;
+    min-height: 71px;
+    margin: 0 auto;
+    border-radius: 10px;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border: 2px solid #dcdcdc;
+	color:#666666;
+}
+
+.header-container, .footer-container {
+    margin-top: -5px;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.logo {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 220px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.cart-button {
+    width: 120px;
+    height: 40px;
+    margin-right: 20px;
+    margin-top: 20px;
+	border-radius:5px;
+	display:inline-block;
+	cursor:pointer;
+	font-family:Arial;
+	font-size: 15px;
+	font-weight:bold;
+	text-decoration:none;
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid #dcdcdc;
+    color:#666666;
+    transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.cart-button:hover {
+	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+    background-color:#666666;
+    color: white;
+}
+
+.cart-button:active {
+    position:relative;
+	top: 2px;
+}
+
+.cart-button:focus {
+	/* position:relative; */
+	top: -2;
+	outline: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-down {
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+</style>
